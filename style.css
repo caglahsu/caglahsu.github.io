@@ -1,0 +1,20 @@
+#banner {
+    width: 800px;
+    height: 100px;
+    background-color: skyblue;
+}
+#content {
+    width: 600px;
+}
+#footer {
+    width: 800px;
+    height: 50px;
+}
+#supporting {
+    width: 100px;
+    height: 150px;
+}
+
+#nav {
+    width: 100px;
+}
