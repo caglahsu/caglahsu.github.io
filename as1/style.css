@@ -69,14 +69,19 @@
 
     #supporting-info {
         width: 15%;
-        background-color: #F8E9BF;
+        background-color: #bff0f8;
         height: fit-content;
         margin-right: 1%;
         padding: 1%;
+        color:rgb(50, 50, 50) ;
     }
 
     #footer {
         height: 100px;
         background-color: #003f5c;
+        color:white;
+        line-height: 200%;
+        text-align: center;
         justify-content: center;
+        padding-top: 5px;
     }
