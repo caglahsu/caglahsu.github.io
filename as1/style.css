@@ -28,20 +28,20 @@
         background-color: rgba(58, 124, 165, 0.5);
         height: fit-content;
         margin-left: 1.5%;
-        font-size: 14px;
+        font-size: 12px;
         text-decoration: none;
         position: fixed;
-        border-radius: 3%;
     }
 
     #navigator-bar-placeholder {
-        width: 20%;
+        width: 18%;
     }
 
     a {
         text-decoration: none;
         font-size: 20px;
         line-height: 200%;
+        color:rgb(50, 50, 50)
     }
 
     a:visited {
@@ -49,10 +49,9 @@
     }
 
     #content {
-        width: 60%;
+        width: 50%;
         background-color: #eeeeee;
         padding: 3%;
-        border-radius: 2%;
     }
 
     p {
@@ -79,4 +78,5 @@
     #footer {
         height: 100px;
         background-color: #003f5c;
+        justify-content: center;
     }
