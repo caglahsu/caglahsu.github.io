@@ -4,6 +4,7 @@
         margin: 0;
     }
 
+    /*置頂bar*/
     #banner {
         height: 100px;
         width: 100%;
@@ -14,7 +15,7 @@
     }
 
     h1 {
-        font-size: 40px;
+        font-size: 24px;
         font-weight: 600;
     }
 
@@ -22,30 +23,41 @@
         height: 100px;
     }
 
+    /*索引*/
+
     #navigator-bar {
         width: 15%;
         padding: 1%;
         background-color: rgba(58, 124, 165, 0.5);
         height: fit-content;
         margin-left: 1.5%;
-        font-size: 12px;
         text-decoration: none;
         position: fixed;
     }
 
-    #navigator-bar-placeholder {
-        width: 18%;
+    li{
+        display: block;
+        font-size: 10px;
+        line-height: 180%;
+        color:rgb(50, 50, 50)
+
     }
 
-    a {
+    li a{
         text-decoration: none;
-        font-size: 20px;
-        line-height: 200%;
         color:rgb(50, 50, 50)
     }
 
-    a:visited {
-        color: rgb(0, 0, 0);
+    li a:hover{
+        color:black;
+        font-weight: 500;
+    }
+
+    /*中間區塊：內文＋補充資訊*/
+    #center {
+        display: flex;
+        gap: 2.5%;
+        margin: 1% 0;
     }
 
     #content {
@@ -54,16 +66,14 @@
         padding: 3%;
     }
 
-    p {
-        font-size: 22px;
-        line-height: 200%;
-        text-align: justify;
+    #navigator-bar-placeholder {
+        width: 18%;
     }
 
-    #center {
-        display: flex;
-        gap: 2.5%;
-        margin: 1% 0;
+    p {
+        font-size: 16px;
+        line-height: 200%;
+        text-align: justify;
     }
 
     #supporting-info {
@@ -74,6 +84,7 @@
         padding: 1%;
         color:rgb(50, 50, 50) ;
     }
+
 
     #footer {
         height: 100px;
