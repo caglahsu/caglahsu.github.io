@@ -9,7 +9,6 @@
         height: 100px;
         width: 100%;
         background-color: #003f5c;
-        clear: both;
         position: fixed;
         padding-left: 2%;
     }
@@ -17,6 +16,10 @@
     h1 {
         font-size: 24px;
         font-weight: 600;
+        display: block;
+        height: 100px;
+        margin: 0;
+        padding-top: 37px
     }
 
     #banner-placeholder {
@@ -68,6 +71,10 @@
 
     #navigator-bar-placeholder {
         width: 18%;
+    }
+
+    h2{
+        font-size: 18px;
     }
 
     p {
