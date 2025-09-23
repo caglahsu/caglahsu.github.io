@@ -1,11 +1,152 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hant">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Design as02</title>
+    <title>休閒生活</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Noto Sans TC', Arial, sans-serif;
+            background: #f7f7f7;
+        }
+        .banner {
+            width: 100%;
+            height: 400px;
+            background: url('1008-1200x400.jpg') center center/cover no-repeat;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            margin: 40px auto;
+            max-width: 1200px;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border-radius: 12px;
+            padding: 32px 36px;
+            gap: 56px;
+        }
+        .sidebar {
+            width: 15%;
+            min-width: 120px;
+            text-align: center;
+            position: sticky;
+            top: 40px;
+            align-self: flex-start;
+            z-index: 10;
+            background: #f8f5ee;
+            border-radius: 10px;
+            border: 2px solid #e6dfd0;
+            box-shadow: 0 1px 4px rgba(180,160,120,0.07);
+            padding: 18px 0 18px 0;
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+        .sidebar li {
+            margin: 18px 0;
+            font-size: 1.1em;
+        }
+        .sidebar a {
+            color: #8d6748;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1em;
+            transition: color 0.2s, font-weight 0.2s;
+        }
+        .sidebar a:hover {
+            color: #5c3b1e;
+            font-weight: 700;
+        }
+        .content {
+            width: 85%;
+        }
+        .content h1 {
+            font-size: 2.2em;
+            margin-bottom: 18px;
+            color: #2b5c2b;
+        }
+        .content h2 {
+            font-size: 1.3em;
+            margin-top: 28px;
+            color: #3a7c3a;
+            font-weight: 500;
+        }
+        .content h2 .icon {
+            font-size: 1.1em;
+            vertical-align: middle;
+            margin-right: 0.3em;
+        }
+        .content p {
+            font-size: 1.18em;
+            line-height: 2.1;
+            color: #444;
+            margin-bottom: 18px;
+            text-align: justify;
+            text-indent: 2em;
+        }
+        @media (max-width: 800px) {
+            .container {
+                flex-direction: column;
+                padding: 18px 6vw;
+                gap: 0;
+            }
+            .sidebar {
+                width: 100%;
+                margin: 0 0 24px 0;
+            }
+            .content {
+                width: 100%;
+            }
+        }
+
+        .bottom-bar {
+            width: 100%;
+            min-height: 56px;
+            background: #e0f5e6;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1em;
+            color: #3a7c3a;
+            letter-spacing: 2px;
+            margin-top: 60px;
+            flex-direction: column;
+            text-align: center;
+            line-height: 1.9;
+            padding: 10px 0 12px 0;
+            font-weight: 500;
+        }
+    </style>
 </head>
 <body>
-    
+    <div class="banner"></div>
+    <div class="container">
+        <nav class="sidebar">
+            <ul>
+                <li><a href="#def">休閒的定義</a></li>
+                <li><a href="#types">休閒活動的多樣性</a></li>
+                <li><a href="#health">休閒與身心健康</a></li>
+                <li><a href="#trend">現代休閒新趨勢</a></li>
+                <li><a href="#end">結語</a></li>
+            </ul>
+        </nav>
+        <main class="content">
+            <h1>休閒生活：讓心靈與生活更美好</h1>
+            <h2 id="def"><span class="icon">🌱</span>休閒的定義</h2>
+            <p>休閒，顧名思義，是指人們在完成日常工作、學業或家庭責任之餘，所進行的自發性活動。這些活動不以經濟利益為目的，而是為了放鬆身心、增進生活品質。休閒的本質在於自由選擇，無論是靜態的閱讀、繪畫，還是動態的運動、旅遊，皆能讓人從中獲得快樂與滿足。現代社會節奏快速，壓力沉重，休閒成為人們調劑生活、維持心理健康的重要方式。</p>
+            <h2 id="types"><span class="icon">🌱</span>休閒活動的多樣性</h2>
+            <p>休閒活動的型態多元，涵蓋了體育運動、藝文欣賞、手作創作、戶外旅遊、社交聚會等。運動如慢跑、游泳、瑜伽，不僅能強健體魄，也有助於釋放壓力。藝文活動如音樂會、展覽、電影欣賞，則能豐富心靈，提升審美能力。手作創作如陶藝、編織、烘焙，讓人在動手過程中獲得成就感。戶外旅遊則能親近自然，開拓視野。社交聚會則促進人際互動，增進情感連結。每個人都能依據自己的興趣與需求，選擇最適合的休閒方式。</p>
+            <h2 id="health"><span class="icon">🌱</span>休閒與身心健康</h2>
+            <p>適當的休閒活動對身心健康有極大助益。運動能促進新陳代謝、提升免疫力，減少慢性疾病的風險。藝文活動則能舒緩情緒、激發創意，讓人心情愉悅。與親友共度休閒時光，有助於建立支持系統，減輕孤獨感。現代人常因工作壓力大、生活步調快而忽略休閒，長期下來容易產生焦慮、憂鬱等心理問題。因此，將休閒融入日常生活，成為維持健康不可或缺的一環。</p>
+            <h2 id="trend"><span class="icon">🌱</span>現代休閒新趨勢</h2>
+            <p>隨著科技進步與生活型態改變，現代休閒活動呈現更多元化。數位娛樂如線上遊戲、串流影音、社群互動，成為年輕世代的新寵。遠距工作興起後，許多人選擇在家進行瑜伽、健身、烹飪等活動，享受居家休閒的樂趣。戶外活動如登山、露營、單車旅行，也因為能親近自然、遠離塵囂而受到歡迎。此外，心靈成長課程、冥想、芳療等身心靈活動，逐漸成為現代人追求內在平衡的新選擇。休閒的型態不斷演變，唯一不變的是人們對美好生活的追求。</p>
+            <h2 id="end"><span class="icon">🌱</span>結語</h2>
+            <p>休閒生活不僅是消磨時間，更是提升生活品質、維持身心健康的關鍵。透過多元的休閒活動，我們能釋放壓力、增進幸福感，並在人際互動中獲得支持與溫暖。無論選擇哪種休閒方式，最重要的是找到屬於自己的節奏，讓休閒成為生活中最美好的調劑。願每個人都能在忙碌之餘，享受屬於自己的休閒時光，讓心靈與生活更加豐盛美好。</p>
+        </main>
+    </div>
+    <div class="bottom-bar">網頁設計與敘事 AS02 | 2025<br>本網頁全部內容皆由AI生成</div>
 </body>
 </html>
