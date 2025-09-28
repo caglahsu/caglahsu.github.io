@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap Demo Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      .banner {
+        height: 50vh;
+        width: 100vw;
+        background: linear-gradient(90deg, #ffb347 0%, #ffcc80 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 3rem;
+        font-weight: bold;
+      }
+      .navbar {
+        height: 80px;
+        font-size: 1.1rem;
+        background: #e0e0e0 !important;
+      }
+      .navbar .navbar-brand {
+        font-size: 1.6rem;
+        font-weight: bold;
+      }
+      .navbar .nav-link {
+        font-size: 1.1rem;
+      }
+      .navbar .container-fluid {
+        justify-content: flex-start !important;
+      }
+      .section-banner {
+        height: 100vh;
+        width: 100vw;
+        background: linear-gradient(90deg, #8f94fb 0%, #4e54c8 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 3rem;
+        font-weight: bold;
+        margin-bottom: 0;
+      }
+      .section-content {
+        min-height: calc(200vh - 60px);
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        padding-top: 5vh;
+        padding-bottom: 40px;
+        background: #fafbfc;
+        margin-bottom: 10vh;
+      }
+      .section-content {
+        min-height: calc(200vh - 60px);
+        display: flex;
+        align-items: flex-start;
+        justify-content: center;
+        padding-top: 5vh;
+        padding-bottom: 40px;
+        background: #fafbfc;
+      }
+      .gray-box {
+        background: #f7f7f7;
+        width: 50%;
+        min-height: 300px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        border-radius: 16px;
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+      }
+      .gray-box h2, .gray-box p {
+        font-size: 1.25rem;
+        line-height: 2.2;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 橫向滿版 banner -->
+    <div class="banner" id="top">Welcome to My Bootstrap Page</div>
+
+    <!-- Sticky 索引列 -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+      <div class="container-fluid">
+        <a class="navbar-brand me-4" href="#top">首頁</a>
+        <div class="collapse navbar-collapse show" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item"><a class="nav-link" href="#section1">區塊一</a></li>
+            <li class="nav-item"><a class="nav-link" href="#section2">區塊二</a></li>
+            <li class="nav-item"><a class="nav-link" href="#section3">區塊三</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  <div style="margin-bottom: 5vh;"></div>
+
+    <!-- 區塊一 -->
+    <div class="section-banner" id="section1">Section 1 Banner</div>
+    <div class="section-content">
+      <div class="gray-box">
+        <h2>Section 1 Title</h2>
+        <p>This is the content for section one. Here you can introduce your first topic, provide background information, or share a story relevant to your site.</p>
+      </div>
+    </div>
+
+    <!-- 區塊二 -->
+    <div class="section-banner" id="section2">Section 2 Banner</div>
+    <div class="section-content">
+      <div class="gray-box">
+        <h2>Section 2 Title</h2>
+        <p>This is the content for section two. Use this space to highlight features, share insights, or present important data in a visually appealing way.</p>
+      </div>
+    </div>
+
+    <!-- 區塊三 -->
+    <div class="section-banner" id="section3">Section 3 Banner</div>
+    <div class="section-content">
+      <div class="gray-box">
+        <h2>Section 3 Title</h2>
+        <p>This is the content for section three. Wrap up your page with a call to action, contact information, or a summary of what visitors should remember.</p>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  </head>
+  <body>
+        <div class="container-fluid p-0 text-white" style="position: relative; min-height: 300px; height: 60vh; background: none;">
+            <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-image: url('NTU.jpg'); background-size: cover; background-position: center;"></div>
+            <div style="position: relative; z-index: 2; width: 100%; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                <h1 style="text-shadow: 2px 2px 8px rgba(0,0,0,0.7);">NTU JOURNALISM</h1>
+                <p style="text-shadow: 1px 1px 6px rgba(0,0,0,0.5);">Welcome to our website</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container text-black p-5 lh-10">
+        <h2>About Us</h2>
+        <p>The Graduate Institute of Journalism at National Taiwan University (NTU Journalism), established in 1991, is one of the most influential academic institutions in journalism and communication in Taiwan. NTU Journalism is dedicated to cultivating professionals with critical thinking, professional competence, and a global perspective. The curriculum covers areas such as journalism theory, media practice, digital communication, and communication policy. With a strong faculty team and close collaboration with domestic and international media and academic institutions, the institute promotes academic research and industry exchange. Graduates are active in journalism, advertising, public relations, digital media, and other major fields, contributing new energy to the communication industry in Taiwan and worldwide.</p>
+    </div>
+
+    <div class="container"> <!--Bootstrap提供了兩種主要的container：一個是 .container 非滿版；另一個是滿版的.container-fluid -->
+        <div class="row g-1">
+            <div class="col-sm-3 p-3 bg-light"> <!-- 寬度在sm(576px)以上，依照3-6-3的column排列（bootstrap將版面分為12等分）！ -->
+                <h3>Teacher</h3>
+                <p>left column</p>
+            </div>
+            <div class="col-sm-9 bg-info p-3">
+                <h3>Student</h3>
+                <p>12345678890</p>
+            </div>
+             <div class="col-sm-12 border text-center border-3 p-3"> <!--border border-1：第一個代表加邊框、第二個代表邊框寬度-->
+                <h3>Contact</h3>
+                <p>left column</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid bg-success-subtle text-center p-5"> <!--bootstrap container-fluid：滿版 bg-primary：顏色藍色（預設） text-white：字體白色  p-3：字體大小-->
+        <p>Website Design @ NTU</p>
+    </div>   
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  </body>
+</html>
