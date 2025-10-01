@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Sticky Left</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<style>
+    #section1 div:first-child {
+        background-image: url('https://p4css.github.io/webScroll/assets/taipei-1.jpg');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    #section2 div:first-child {
+        background-image: url("https://p4css.github.io/webScroll/assets/taipei-2.jpg");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    #section3 div:first-child {
+        background-image: url('https://p4css.github.io/webScroll/assets/taipei-3.jpg');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        z-index: -1;
+    }
+
+    #section4 div:first-child {
+        background-image: url("https://p4css.github.io/webScroll/assets/taipei-4.jpg");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+</style>
+
+<body>
+    <div class="container-fluid vh-100 bg-secondary text-white d-flex align-items-center justify-content-center">
+        <h1 class="text-center">div 1</h1>
+    </div>
+    <section id="section1" class="row" style="height:300vh;"> <!--變成左右兩欄，左欄圖片sticky-top; 右欄跑文字-->
+        <div class="sticky-top col-sm-6" style="height:100vh;"></div>
+        <div class="col-sm-6" style="height:100vh;">
+            <h1 class="text-center">text</h1>
+        </div>
+    </section>
+    <section id="section2" class="row" style="height:300vh;">
+        <div class="sticky-top col-sm-6" style="height:100vh;"></div>
+        <div class="col-sm-6" style="height:100vh;">
+            <h1 class="text-center">text</h1>
+        </div>
+    </section>
+    <section id="section3" class="row" style="height:300vh;"> <!--滿版sticky-top-->
+        <div class="sticky-top" style="height:100vh;"></div>
+        <div class="row"></div> <!--滿版圖，文字飛進來-->
+            <div class="col-sm-6"></div>
+            <div class="col-sm-6 bg-primary text-white rounded shadow-lg" style="height:10vh; width: 600px; ">
+                <h1>flying card</h1>
+            </div>
+    </section>
+        <section id="section4" class="row" style="height:300vh;">
+        <div class="sticky-top col-sm-6" style="height:100vh;"></div>
+        <div class="col-sm-6" style="height:100vh; ">
+            <h1 class="text-center">text</h1>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

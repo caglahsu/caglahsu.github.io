@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AS04 a story in NTU</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<style>
+    @import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css);
+
+    body {
+        font-family: ‘cwTeXYen’, sans-serif;
+        background-color: #f6f5ef;
+    }
+
+    #section0 {
+        background-image: url('NTU.jpg');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+        z-index: 1;
+    }
+
+    #section0::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.15);
+        /* 黑色半透明遮罩 */
+        z-index: 2;
+    }
+
+    #section0 h1 {
+        position: relative;
+        z-index: 3;
+        font-size: 4rem;
+        font-weight: bold;
+        color: #fff;
+        text-shadow: 2px 2px 8px #222, 0 0 10px #fff;
+        letter-spacing: 2px;
+    }
+
+    #section1 div:first-child {
+        background-image: url('NTU bike1.jpg');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        z-index: -1;
+    }
+
+    #section2 div:first-child {
+        background-image: url("NTU bike2.jpg");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        z-index:-1
+    }
+
+    #section3 div:first-child {
+        background-image: url('NTU bike3.jpg');
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        z-index: -1;
+    }
+
+    #section4 div:first-child {
+        background-image: url("NTU bike4.jpg");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        z-index: -1;
+    }
+
+    #section5 div:first-child {
+        background-image: url("NTU bike5.jpg");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        z-index: -1;
+    }
+
+    #section6 div:first-child {
+        background-image: url("NTU bike6.jpg");
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
+
+<body>
+    <section id="section0" class="container-fluid vh-100 d-flex align-items-center justify-content-center"
+        style="overflow:hidden;">
+        <h1 class="text-center">台大學生日常</h1>
+    </section>
+    <section id="section1" class="row" style="height:400vh;"> <!--變成左右兩欄，左欄圖片sticky-top; 右欄跑文字-->
+        <div class="sticky-top col-sm-6" style="height:100vh;"></div>
+        <div class="col-sm-6" style="height:100vh;">
+            <h3 class="text-center" style="padding-top:110vh ;padding-left:20px;line-height: 200%; color:#333;">
+                我是一個平凡普通的台大生。<br>
+                今天的課程終於結束，<br>
+                心裡有點疲憊，但也感到輕鬆。<br>
+                校園的空氣混著微微的涼意，讓人覺得很舒服。
+            </h3>
+            <h3 class="text-center" style="padding-top:110vh ;padding-left:20px;line-height: 200%; color:#333;">
+                我慢慢走向Ubike租借站，<br>
+                準備借一台Ubike回家。<br>
+                想像著騎車穿過校園的樹蔭，心情也跟著放鬆下來。<br>
+            </h3>
+        </div>
+    </section>
+    <section id="section2" class="row" style="height:250vh;">
+        <div class="sticky-top" style="height:100vh; padding: 0;"></div> <!--滿版圖，文字飛進來-->
+            <div class="col-sm-6"></div>
+            <div class="col-sm-6 bg-light d-flex text-white rounded shadow-lg text-center justify-content-center align-items-center" style="height:10vh; width: 500px; margin-left: 10rem; background: linear-gradient(135deg, #6dd5ed 0%, #2193b0 100%); color: #fff; box-shadow: 0 8px 32px 0 rgba(33,147,176,0.2);">
+                <h2>總圖前面沒有Ubike可以借...</h2>
+            </div>
+    </section>
+
+    <section id="section3" class="row" style="height:250vh;">
+        <div class="sticky-top" style="height:100vh; padding: 0;"></div> <!--滿版圖，文字飛進來-->
+            <div class="col-sm-6 bg-light d-flex text-white rounded shadow-lg text-center justify-content-center align-items-center" style="height:10vh; width: 500px; margin-left: 20rem; background: linear-gradient(135deg, #6dd5ed 0%, #2193b0 100%); color: #fff; box-shadow: 0 8px 32px 0 rgba(33,147,176,0.2);">
+                <h2>校門口也沒有Ubike可以借...</h2>
+            </div>
+            <div class="col-sm-6"></div>
+    </section>
+
+    <section id="section4" class="row" style="height:250vh;">
+        <div class="sticky-top" style="height:100vh; padding: 0;"></div> <!--滿版圖，文字飛進來-->
+            <div class="col-sm-6 bg-light d-flex text-white rounded shadow-lg text-center justify-content-center align-items-center" style="height:10vh; width: 450px; margin-left: 15rem; background: linear-gradient(135deg, #6dd5ed 0%, #2193b0 100%); color: #fff; box-shadow: 0 8px 32px 0 rgba(33,147,176,0.2);">
+                <h2>連醉月湖旁邊都沒有車...</h2>
+            </div>
+            <div class="col-sm-6"></div>
+    </section>
+
+    <section id="section5" class="row" style="height:250vh;">
+        <div class="sticky-top" style="height:100vh; padding: 0;"></div> <!--滿版圖，文字飛進來-->
+            <div class="col-sm-6"></div>    
+            <div class="col-sm-6 bg-light d-flex text-white rounded shadow-lg text-center justify-content-center align-items-center" style="height:10vh; width: 450px; margin-left: 15rem; background: linear-gradient(135deg, #6dd5ed 0%, #2193b0 100%); color: #fff; box-shadow: 0 8px 32px 0 rgba(33,147,176,0.2);">
+                <h2>好累喔...我怎麼這麼命苦...</h2>
+            </div>
+    </section>
+
+    <section id="section6" class="row" style="height:300vh;"> <!--變成左右兩欄，左欄圖片sticky-top; 右欄跑文字-->
+        <div class="sticky-top col-sm-6" style="height:100vh;"></div>
+        <div class="col-sm-6" style="height:100vh;">
+            <h3 class="text-center" style="padding-top:110vh ;padding-left:20px;line-height: 200%; color:#333;">
+                結果最後走路回家.....<br>
+                又是討厭台大的一天。
+            </h3>
+            <h3 class="text-center" style="padding-top:120vh ;padding-left:20px;line-height: 200%; color:#333;">
+               全文完。
+            </h3>
+        </div>
+    </section>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
