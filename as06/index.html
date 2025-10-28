@@ -58,7 +58,7 @@
         /* 螢光筆筆畫效果 */
         .bad {
             position: relative;
-            display: inline-block;
+            display: inline;
             color: #0d47a1;
             font-weight: bold;
             /* Dark blue for text */
@@ -74,7 +74,7 @@
             background-color: #bbdefb;
             /* Light blue background */
             z-index: -1;
-            transition: width 1s ease;
+            transition: width 0.5s ease;
         }
 
         .bad.visible::before {
@@ -290,7 +290,7 @@
         </div>
         <div class="col-md-6" style="height: 100vh;">
             <div style="padding-top: 110vh; line-height: 200%; color: #333;">
-                <p>黃正聰看到媒體報導墾丁觀光業的「慘狀」，感到相當意外。「墾丁很多業者我都認識，我問他說：『如果遊客衰退七成，那你們這些住宿業者應該都倒光了吧？』」然而根據他的研究，墾丁旅宿業者的營收，不但沒有衰退，<span class="bad">反倒還在十年內成長了60%</span>。
+                <p>黃正聰看到媒體報導墾丁觀光業的「慘狀」，感到相當意外。「墾丁很多業者我都認識，我問他說：『如果遊客衰退七成，那你們這些住宿業者應該都倒光了吧？』」然而根據他的研究，墾丁旅宿業者的營收，不但沒有衰退，<span  class="bad">反倒還在十年內成長了60%</span>。
                 </p>
             </div>
         </div>
@@ -304,7 +304,7 @@
 
     <!-- 第五段 -->
     <div class="focus-section mb-5">
-        <p>林榮欽說明，雖然墾丁當地人潮有下降，但是並不像網路上說的如此誇張，「會喜歡來的他（觀光客）還是會來」他說。對於媒體喜愛關注墾丁的現象，楊勝評認為，這是墾丁轉型的大好機會，「既然這麼多人關心，如果能夠趁這個機會而有所轉型，那不是一件很棒的事情？」他說。楊勝評解釋，可以從觀光景點的整潔下手，將街景全面「潔淨化」，就能有效提升觀光環境。
+        <p>林榮欽說明，雖然墾丁當地人潮有下降，但是並不像網路上說的如此誇張，「會喜歡來的他（觀光客）還是會來」他說。對於媒體喜愛關注墾丁的現象，楊勝評認為，這是墾丁轉型的大好機會，<span class="bad">「既然這麼多人關心，如果能夠趁這個機會而有所轉型，那不是一件很棒的事情？」</span>他說。楊勝評解釋，可以從觀光景點的整潔下手，將街景全面「潔淨化」，就能有效提升觀光環境。
         </p>
     </div>
 
@@ -316,7 +316,7 @@
 
     <!-- 第七段 -->
     <div class="focus-section mb-5">
-        <p>而劉琴鳴認為，墾丁的旅遊景點多年來都沒有變化、設備老舊，且地方政府缺乏長期性旅遊規劃、品質再造，導致墾丁觀光的競爭力下滑，無法與花蓮、宜蘭、台東、澎湖、小琉球等不斷推陳出新的區域競爭。<span class="bad">不過如今墾丁正在慢慢推動改革，包括改善人行空間、交通設計、加強墾丁大街管理、新增旅遊景點等</span>，「墾丁必須改變。」他說。</p>
+        <p>而劉琴鳴認為，墾丁的旅遊景點多年來都沒有變化、設備老舊，且地方政府缺乏長期性旅遊規劃、品質再造，導致墾丁觀光的競爭力下滑，無法與花蓮、宜蘭、台東、澎湖、小琉球等不斷推陳出新的區域競爭。不過如今墾丁正在慢慢推動改革，包括改善人行空間、交通設計、加強墾丁大街管理、新增旅遊景點等，「墾丁必須改變。」他說。</p>
     </div>
     </div>
 
@@ -361,7 +361,7 @@
                 // Ensure the visible class is applied correctly
                 $('.bad').each(function () {
                     var elemTop = $(this).offset().top;
-                    if (scrollPos + windowHeight/1.5 > elemTop) {
+                    if (scrollPos + windowHeight/1.2 > elemTop) {
                         $(this).addClass('visible');
                     } else {
                         $(this).removeClass('visible');
