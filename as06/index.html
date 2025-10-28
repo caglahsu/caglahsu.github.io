@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>墾丁成為國旅焦點</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* 基本樣式 */
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            line-height: 1.8;
+            transition: background-color 0.5s ease, color 0.5s ease;
+        }
+
+        /* 美化第一個 section */
+        #section0 {
+            background-image: url('11006075.jpg');
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+            z-index: 1;
+            margin-bottom: 30vh;
+        }
+
+        #section0::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.1);
+            /* 淡化圖片透明度 */
+            z-index: 2;
+        }
+
+        #section0 h1 {
+            position: relative;
+            z-index: 3;
+            font-size: 4rem;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 2px 2px 8px #222, 0 0 10px #fff;
+            letter-spacing: 2px;
+        }
+
+        p {
+            width: 50%;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 1.25rem;
+            line-height: 200%;
+        }
+
+        /* 螢光筆筆畫效果 */
+        .bad {
+            position: relative;
+            display: inline-block;
+            color: #0d47a1;
+            font-weight: bold;
+            /* Dark blue for text */
+        }
+
+        .bad::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 80%;
+            background-color: #bbdefb;
+            /* Light blue background */
+            z-index: -1;
+            transition: width 1s ease;
+        }
+
+        .bad.visible::before {
+            width: 100%;
+        }
+
+        /* 表格切換效果 */
+        .chart-container {
+            position: relative;
+            height: 300px;
+        }
+
+        .chart {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .chart.active {
+            opacity: 1;
+        }
+
+        /* 翻卡效果 */
+        .flip-card {
+            perspective: 1000px;
+            height: 400px;
+            margin: 2rem auto;
+            max-width: 800px;
+        }
+
+        .flip-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 1s;
+            transform-style: preserve-3d;
+        }
+
+        .flip-card.active .flip-card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .flip-card-front,
+        .flip-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            overflow: hidden;
+        }
+
+        .flip-card-front {
+            background-color: #e0f7fa;
+            /* 淡藍色 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .flip-card-front img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .flip-card-back {
+            background: linear-gradient(135deg, #b3e5fc, #81d4fa);
+            /* 淺黃色系 */
+            color: #01579b;
+            /* 深藍色 */
+            transform: rotateY(180deg);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* 底線動畫效果 */
+        .underline-animation {
+            display: inline-block;
+            position: relative;
+        }
+
+        .underline-animation::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background-color: #1e88e5;
+            transition: width 0.5s ease-in-out;
+        }
+
+        .underline-animation.active::after {
+            width: 100%;
+        }
+
+        /* 段落樣式 */
+        p {
+            width: 50%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* 圖表區域 */
+        .chart-section {
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 15px;
+        }
+
+        /* 底部 bar 樣式 */
+        .footer-bar {
+            background-color: #f8f9fa;
+            color: #333;
+            text-align: center;
+            padding: 1rem;
+            font-size: 0.9rem;
+            border-top: 1px solid #ddd;
+        }
+
+        /* 暗化效果 */
+        .dark-mode {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: #fff;
+        }
+
+        .light-mode {
+            background-color: rgb(255, 255, 255);
+            color: #000000;
+        }
+    </style>
+</head>
+
+<body>
+    <section id="section0" class="container-fluid vh-100 d-flex align-items-center justify-content-center"
+        style="overflow:hidden;">
+        <h1 class="text-center">墾丁成為國旅焦點</h1>
+    </section>
+
+    <!-- 翻卡效果 -->
+    <section id="flip-card-section" style="margin-bottom: 70vh;">
+        <div class="flip-card">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <img src="viewkenting.jpg" alt="墾丁風景">
+                </div>
+                <div class="flip-card-back">
+                    <h3>墾丁國家公園</h3>
+                    <p><br>境內有許多豐富的地形景觀<br>周邊的海水浴場是民眾消暑的好去處。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 第一段 -->
+    <section id="s2" style="height: 100vh;">
+        <div class="focus-section mb-5" >
+            <p>網路上不乏對墾丁的負面評價，如<span class="bad">「天價滷味」、「哄抬房價」</span>等標籤頻頻出現，大大折損了墾丁的形象。</p>
+        </div>
+        <!-- 第二段 -->
+        <div class="focus-section mb-5" >
+            <p>墾丁里里長劉琴鳴在墾丁出生長大，他看過墾丁最美的海灘，和豐富的自然景觀，深感墾丁獨特的魅力難以用金錢衡量，「墾丁以前是非常好的。」他感嘆地說。對於墾丁的形象轉變，他有著深刻體會。劉琴鳴指出，特定媒體或網紅，喜愛發布具誤導性或針對性的內容，<span class="bad">「提出批評似乎比較有話題性。」</span></p>
+        </div>
+
+        <!-- 第三段 -->
+        <div class="focus-section mb-5">
+            <p>墾丁作為南台灣最大的旅遊區，擁有眾多五星級飯店、餐飲以及風景區，更曾是台灣熱門景區代表，在國內外都相當有知名度。李奇嶽說明，墾丁人潮眾多，觀光效益帶來的便是人事、店租、材料各方面的價格高漲。「你付出了高額的成本來旅行，對它（墾丁）的期待也會高。所以一旦它（墾丁）有一些做不好的，你的抱怨就會高。」
+            </p>
+        </div>
+    </section>
+
+    <!-- 圖表區域 -->
+    <section id="section1" class="row" style="height:150vh; margin-top: 35vh;">
+        <div class="col-md-6 sticky-top"
+            style="height: 30vh; display: flex; justify-content: center; align-items: center;">
+            <div class="chart-container" style="width: 70%; height: auto; margin-top: 0;">
+                <div class="chart active" id="chart1">
+                    <div class="flourish-embed flourish-chart" data-src="visualisation/22960107">
+                        <script src="https://public.flourish.studio/resources/embed.js"></script>
+                        <noscript>
+                            <img src="https://public.flourish.studio/visualisation/22960107/thumbnail" width="100%"
+                                alt="chart visualization" />
+                        </noscript>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6" style="height: 100vh;">
+            <div style="padding-top: 110vh; line-height: 200%; color: #333;">
+                <p>根據交通部觀光署資料，墾丁景點的旅遊人數在十年內<span class="bad">「雪崩」</span>式下滑，前後相差近四倍。</p>
+            </div>
+        </div>
+    </section>
+    <section id="section1" class="row" style="height:150vh; margin-top: 50vh;">
+        <div class="col-md-6 sticky-top"
+            style="height: 50vh; display: flex; justify-content: center; align-items: center;">
+            <div class="chart-container" style="width: 70%; height: auto; margin-top: 0;">
+                <div class="chart active" id="chart1">
+                    <div class="flourish-embed flourish-chart" data-src="visualisation/22959979">
+                        <script src="https://public.flourish.studio/resources/embed.js"></script><noscript><img
+                                src="https://public.flourish.studio/visualisation/22959979/thumbnail" width="100%"
+                                alt="chart visualization" /></noscript>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6" style="height: 100vh;">
+            <div style="padding-top: 110vh; line-height: 200%; color: #333;">
+                <p>黃正聰看到媒體報導墾丁觀光業的「慘狀」，感到相當意外。「墾丁很多業者我都認識，我問他說：『如果遊客衰退七成，那你們這些住宿業者應該都倒光了吧？』」然而根據他的研究，墾丁旅宿業者的營收，不但沒有衰退，<span
+                        class="bad">反倒還在十年內成長了60%</span>。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 第四段 -->
+    <div class="focus-section mb-5" style="margin-top: 70vh;">
+        <p>黃正聰指出，人數衰減與當地業者實際營收之間的落差，與墾丁客群的改變有關。外國旅客與本地旅客的旅遊模式不同，外國旅客來到墾丁會到各個觀光景點遊憩，本地旅客卻可能因為「以後還有很多機會可以去」、「景點已經去過了」等理由，而選擇待在渡假村裡。「事實上墾丁作為一個觀光據點，它帶動的觀光產值其實是並沒有減少的。」他說。
+        </p>
+    </div>
+
+    <!-- 第五段 -->
+    <div class="focus-section mb-5">
+        <p>林榮欽說明，雖然墾丁當地人潮有下降，但是並不像網路上說的如此誇張，「會喜歡來的他（觀光客）還是會來」他說。對於媒體喜愛關注墾丁的現象，楊勝評認為，這是墾丁轉型的大好機會，「既然這麼多人關心，如果能夠趁這個機會而有所轉型，那不是一件很棒的事情？」他說。楊勝評解釋，可以從觀光景點的整潔下手，將街景全面「潔淨化」，就能有效提升觀光環境。
+        </p>
+    </div>
+
+    <!-- 第六段 -->
+    <div class="focus-section mb-5">
+        <p>除了環境整潔外，莊淑姿指出，墾丁若想要再次發展，也必須考慮生態議題。墾丁全世界唯一一座，在區域內設置夜市大街和核三廠的國家公園，如今已經被國際組織除名。莊淑姿強調，國家公園的首要任務是保護生態環境，然而墾丁在過去人流爆滿、過度飽和的情況，對當地生態和旅遊品質都有不良影響。他說：「一定需要走過去那種大眾發展旅遊的路線嗎？我認為這是一個選擇。」
+        </p>
+    </div>
+
+    <!-- 第七段 -->
+    <div class="focus-section mb-5">
+        <p>而劉琴鳴認為，墾丁的旅遊景點多年來都沒有變化、設備老舊，且地方政府缺乏長期性旅遊規劃、品質再造，導致墾丁觀光的競爭力下滑，無法與花蓮、宜蘭、台東、澎湖、小琉球等不斷推陳出新的區域競爭。<span
+                class="bad">不過如今墾丁正在慢慢推動改革，包括改善人行空間、交通設計、加強墾丁大街管理、新增旅遊景點等</span>，「墾丁必須改變。」他說。</p>
+    </div>
+    </div>
+
+    <!-- 底部 bar -->
+    <footer class="footer-bar" style="height: 10vh; margin-top: 30vh;">
+        <a href="https://newslab.nccu.edu.tw/" class="author"
+            style="font-weight: bold; text-decoration: none; color: #222;">原文：國旅困境寫真：拆解台灣觀光的結構性挑戰</a>
+        <div class="author">作者：許巧昕、鄭孟佳</div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // 滾動事件處理
+            $(window).scroll(function () {
+                // Re-define variables on each scroll
+                var windowHeight = $(window).height();
+                var scrollPos = $(window).scrollTop();
+
+                // 翻卡效果
+                $('.flip-card').each(function () {
+                    var elemTop = $(this).offset().top;
+                    if (scrollPos > (elemTop - windowHeight / 3)) {
+                        $(this).addClass('active');
+                    }
+                });
+
+                // 暗化效果 for section2
+                var flipCardSection = $('#flip-card-section');
+                var section2 = $('#s2');
+
+                var flipCardBottom = flipCardSection.offset().top + flipCardSection.outerHeight() - 100; // Trigger earlier
+                var section2Bottom = section2.offset().top + section2.outerHeight() - 100; // Trigger earlier
+
+                if (scrollPos > flipCardBottom && scrollPos < section2Bottom/1.15) {
+                    $('body').addClass('dark-mode').removeClass('light-mode');
+                } else {
+                    $('body').addClass('light-mode').removeClass('dark-mode');
+                }
+
+                // Ensure the visible class is applied correctly
+                $('.bad').each(function () {
+                    var elemTop = $(this).offset().top;
+                    if (scrollPos + windowHeight/1.5 > elemTop) {
+                        $(this).addClass('visible');
+                    } else {
+                        $(this).removeClass('visible');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
