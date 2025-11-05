@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Bootstrap template with jQuery">
+    <meta name="author" content="">
+    <title>Scrolled-Video04: Flying card over video</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <!-- Custom CSS -->
+    <style>
+        #video-section {
+            position: relative;
+            background-color: #000;
+        }
+
+        #video {
+            position: sticky;
+            top: 0;
+            left: 0;
+            min-width: 100%;
+            min-height: 100vh;
+            width: 100%;
+            height: 100vh;
+            object-fit: cover;
+            z-index: 1;
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+        }
+
+        .card-section {
+            position: relative;
+            z-index: 10;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .content-card {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .content-card h1 {
+            color: white;
+            margin-bottom: 25px;
+        }
+
+        .content-card p {
+            color: white;
+            line-height: 1.8;
+            text-align: center;
+        }
+
+        .content-card code {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 2px 6px;
+            color: #ffd700;
+        }
+
+        /* 不同的卡片背景色 */
+        .card-dark {
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .card-medium {
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .card-light {
+            background: rgba(0, 0, 0, 0.4);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Main Container -->
+    <div class="container-fluid">
+
+        <!-- Leading Section 前導區 -->
+        <div id="leading-section" class="bg-dark"
+            style="width:100%; height:100vh; display: flex; align-items: center; justify-content: center;">
+            <div class="container">
+                <h1>Scrolled-Video with Card Layout</h1>
+                <p style="color: white; text-align: center;">此專題展示如何透過滾動來控制影片播放進度</p>
+                <p style="color: white; text-align: center; font-size: 0.9em; margin-top: 20px;">滾動探索內容 ↓</p>
+            </div>
+        </div>
+
+        <!-- Video Section with Cards -->
+        <div id="video-section">
+            <!-- Video Background -->
+            <video id="video" src="https://web.cw.com.tw/climate-2020/landing/cover-mobile.mp4" preload="auto"></video>
+
+            <!-- Content Wrapper -->
+            <div style="position: relative; z-index: 10;">
+
+                <!-- Card 1: Core Design -->
+                <div class="card-section">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-md-6">
+                                <div class="content-card card-dark">
+                                    <h1>Core Design - 核心設計</h1>
+                                    <p>
+                                        <strong>1. Fixed Video Background：</strong>影片使用 <code>position: fixed</code> 和
+                                        <code>z-index: 1</code>，固定在背景層<br><br>
+                                        <strong>2. Flying Card Layout：</strong>使用 Bootstrap Grid 的 <code>col-md-6</code>
+                                        創造 3:6:3 佈局，卡片浮在影片上方<br><br>
+                                        <strong>3. Transparent Sections：</strong>每個 section 是 100vh
+                                        全透明，只有卡片區域有半透明背景<br><br>
+                                        <strong>4. Z-index Layering：</strong>使用 <code>z-index: 10</code> 確保內容在影片上方
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: JavaScript -->
+                <div class="card-section">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-md-6">
+                                <div class="content-card card-medium">
+                                    <h1>JavaScript - 影片滾動控制</h1>
+                                    <p>
+                                        <strong>1. 計算播放區間：</strong><br>
+                                        <code>videoStartPosition = videoSection 頂部位置</code><br>
+                                        <code>videoEndPosition = endingSection 頂部位置</code><br><br>
+                                        <strong>2. 監聽滾動事件：</strong><br>
+                                        使用 jQuery 的 <code>$(window).scroll()</code> 監聽頁面滾動<br><br>
+                                        <strong>3. 影片顯示控制：</strong><br>
+                                        • 在 leading section：影片隱藏 <code>removeClass('active')</code><br>
+                                        • 在 video section：影片顯示並根據滾動比例播放<br>
+                                        • 在 ending section：影片隱藏<br><br>
+                                        <strong>4. 計算播放進度：</strong><br>
+                                        <code>scrollProgress = (當前位置 - 起始位置) / 播放區間長度</code><br>
+                                        <code>videoElement.currentTime = duration × scrollProgress</code>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Bootstrap Grid -->
+                <div class="card-section">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-md-6">
+                                <div class="content-card card-light">
+                                    <h1>Bootstrap Grid - 響應式佈局</h1>
+                                    <p>
+                                        <strong>使用 Bootstrap Grid System：</strong><br>
+                                        <code>container</code> - 提供響應式寬度容器<br>
+                                        <code>row</code> - 創建水平行佈局<br>
+                                        <code>col-md-6</code> - 在中等螢幕及以上佔據 6/12 (50%) 寬度<br>
+                                        <code>justify-content-center</code> - 將列置中對齊<br><br>
+                                        <strong>Flying Card 效果：</strong><br>
+                                        • Section 是 100vh 全透明背景<br>
+                                        • 只有 col-md-6 內的卡片有半透明黑色背景<br>
+                                        • 卡片高度自適應內容，浮在影片上方<br>
+                                        • 創造輕盈的漂浮視覺效果
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Spacer for video playback -->
+                <div style="height: 100vh;"></div>
+
+            </div><!-- End Content Wrapper -->
+        </div>
+
+        <!-- Ending Section 結尾區 -->
+        <div id="ending-section" class="bg-dark"
+            style="width:100%; height:100vh; display: flex; align-items: center; justify-content: center;">
+            <div class="container">
+                <h1>Prompts</h1>
+                <div style="color: white; text-align: left; max-width: 900px; margin: 0 auto;">
+                    <p style="text-align: center; margin-bottom: 30px;"><strong>從零開始的完整開發流程：</strong></p>
+                    <ul style="line-height: 2;">
+                        <ul>
+                            <ul>
+                                <li>
+                                    <strong>頁面設定：</strong>
+                                    建立一個使用 <code>Bootstrap 5</code> 和 <code>jQuery</code> 的 HTML5 網頁。
+                                    頁面包含開頭的 <code>leading section</code>（100vh，高度滿版，背景為深色）
+                                    以及結尾的 <code>ending section</code>（100vh，背景為深色）。
+                                </li>
+
+                                <li>
+                                    <strong>影片背景：</strong>
+                                    在中間區域加入一個 <code>&lt;video&gt;</code> 元素作為背景，設定 <code>position: sticky</code> 與
+                                    <code>top: 0</code>，
+                                    讓影片在滾動時固定在畫面上。
+                                    使用 <code>object-fit: cover</code> 讓影片自動填滿整個視窗。
+                                    加上 <code>preload="auto"</code> 以預先載入影片、確保播放順暢。
+                                </li>
+
+                                <li>
+                                    <strong>影片區與卡片設計：</strong>
+                                    在開頭與結尾之間建立 <code>video-section</code>，背景為黑色。
+                                    內含三個 <code>card-section</code>，每個區塊高度為 100vh。
+                                    使用
+                                    Flexbox（<code>display: flex</code>、<code>align-items: center</code>、<code>justify-content: center</code>）讓內容垂直置中。
+                                    採用 Bootstrap Grid（<code>col-md-6</code>）形成 3:6:3 的版面，讓內容卡片置於中央。
+                                    每張卡片使用不同透明度的黑色背景（<code>rgba(0,0,0,0.8 / 0.6 / 0.4</code>）、加上圓角與陰影效果。
+                                    設定 <code>z-index: 10</code> 讓卡片顯示在影片之上。
+                                </li>
+
+                                <li>
+                                    <strong>滾動互動（JavaScript）：</strong>
+                                    使用 jQuery 監聽滾動事件，計算 <code>video-section</code> 的相對位置。
+                                    當區塊頂端距離視窗底部小於等於 50vh 時開始播放影片。
+                                    播放範圍為進入 50vh 至 <code>video-section</code> 底部之間。
+                                    根據滾動進度計算 <code>scrollProgress</code>，設定
+                                    <code>videoElement.currentTime = duration × scrollProgress</code>。
+                                    在進入 <code>leading section</code> 前維持影片第一幀，結束後維持最後一幀。
+                                </li>
+
+                                <li>
+                                    <strong>補充內容：</strong>
+                                    在影片區結束後加入一個 100vh 的 <code>spacer div</code>，讓影片有足夠播放空間。
+                                    每張卡片中可加入技術說明文字，介紹 <em>核心設計概念</em>、<em>JavaScript 邏輯</em> 與 <em>Bootstrap 網格系統</em>。
+                                </li>
+                            </ul>
+
+                        </ul>
+                    </ul>
+                    <p style="text-align: center; margin-top: 30px; font-size: 0.9em; color: #aaa;">
+                        <em>關鍵：逐步迭代，從基本結構開始，再加入互動效果，最後優化細節</em>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha384-1H217gwSVyLSIfaLxHbE7dRb3v4mYCKbpQvzx0cegeju1MVsGrX5xXxAvs/HgeFs"
+        crossorigin="anonymous"></script>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+    <!-- Custom JavaScript -->
+    <script>
+        $(function () {
+            const videoElement = $('#video').get(0);
+
+            if (!videoElement) {
+                console.error("Video element not found");
+                return;
+            }
+
+            // 獲取 video section 和 ending section
+            const videoSection = $('#video-section');
+            const endingSection = $('#ending-section');
+
+            $(window).scroll(function () {
+                const currentScrollPosition = $(document).scrollTop();
+                const windowHeight = $(window).height();
+
+                // 計算 video section 的位置
+                const videoSectionTop = videoSection.offset().top;
+                const videoSectionBottom = videoSectionTop + videoSection.outerHeight();
+
+                // 判斷 video-section 是否進入 viewport 50vh (視窗底部距離 section 頂部 < 50vh)
+                const distanceToVideoSection = videoSectionTop - (currentScrollPosition + windowHeight);
+                const isVideoSectionEntering = distanceToVideoSection <= windowHeight * 0.5;
+
+                // 判斷是否離開 video section
+                const isLeavingVideoSection = currentScrollPosition >= videoSectionBottom;
+
+                if (videoElement.duration) {
+                    if (!isVideoSectionEntering) {
+                        // 還沒進入 50vh 範圍，保持在開始
+                        videoElement.currentTime = 0;
+                    } else if (isLeavingVideoSection) {
+                        // 已經離開 video section，保持在結束
+                        videoElement.currentTime = videoElement.duration;
+                    } else {
+                        // 在播放區間內，計算播放進度
+                        // 播放起點：video section 進入 viewport 50vh 的位置
+                        const videoStartPosition = videoSectionTop - windowHeight * 0.5;
+                        // 播放終點：video section 底部
+                        const videoEndPosition = videoSectionBottom;
+                        const videoScrollRange = videoEndPosition - videoStartPosition;
+
+                        const scrollInVideoRange = currentScrollPosition - videoStartPosition;
+                        const scrollProgress = Math.max(0, Math.min(scrollInVideoRange / videoScrollRange, 1));
+
+                        videoElement.currentTime = videoElement.duration * scrollProgress;
+                    }
+                }
+            });
+
+            // 初始化：觸發一次 scroll 事件
+            $(window).trigger('scroll');
+        });
+
+    </script>
+
+</body>
+
+</html>

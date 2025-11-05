@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AS07: Using Template</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        #outer {
+            background-image: url(colorful.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            width: 100%;
+        }
+
+        /* 滾動動畫條 */
+        #statusbar {
+            width: 0;
+            height: 100vh;
+            background-image: url(black.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+
+        .section {
+            height: 100vh;
+        }
+
+        .tall-section {
+            height: 300vh;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .text-center {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .scroll-container {
+            height: 1000vh;
+            position: relative;
+        }
+
+        .horizontal-section {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            width: 500vw;
+            display: flex;
+            flex-direction: row;
+            transition: transform 0.1s linear;
+        }
+
+        .horizontal-item {
+            width: 100vw;
+            height: 100vh;
+            flex-shrink: 0;
+            background-size: cover;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div style="background:rgb(1, 1, 20);" class="section">
+        <h1 style=" color:white; text-align:center; padding-top:40vh;">碩士生的改變</h1>
+        <p style="color:white; text-align:center; font-size:1.2em; line-height:200%;">開學至今，我們的生活怎麼樣了？</p>
+    </div>
+
+    <div class="tall-section">
+        <div id="outer">
+            <div id="statusbar"></div>
+        </div>
+    </div>
+
+    <div style="background:rgb(10, 7, 70);" class="section">
+        <h1 style="color:white; text-align:center; padding-top:40vh;">心情轉變
+        </h1>
+        <p style="color:white; text-align:center; font-size:1.2em; line-height:200%;">開心入台大，現在想休學（沒）</p>
+    </div>
+
+    <div class="scroll-container">
+        <div class="horizontal-section">
+            <div class="horizontal-item" style="background-image: url(5.jpeg);"></div>
+            <div class="horizontal-item" style="background-image: url(1.jpeg);"></div>
+            <div class="horizontal-item" style="background-image: url(2.jpeg);"></div>
+            <div class="horizontal-item" style="background-image: url(3.jpeg);"></div>
+            <div class="horizontal-item" style="background-image: url(4.jpeg)"></div>
+        </div>
+    </div>
+
+    <div style="background:rgb(14, 22, 68);" class="section">
+        <h1 style=" color:white; text-align:center; padding-top:40vh;">開學快樂是假象，很累很躁是日常</h1>
+        <p style="color:white; text-align:center; font-size:1.2em; line-height:200%;">研究所真的很多文本、報告、作業、討論呀......</p>
+    </div>
+
+    <div style="background:rgb(41, 29, 119);" class="section">
+        <h1 style=" color:white; text-align:center; padding-top:40vh;">希望這學期順利活著。</h1>
+        <p style="color:white; text-align:center; font-size:1.2em; line-height:200%;">這個故事告訴我們，人的能力還是有限QQ</p>
+    </div>
+
+    <div class="text-center" style="height:10vh;background:rgb(159, 181, 255); font-size:14px; text-align: center; line-height: 180%;">台大新聞所網頁設計與敘事 AS07<br>Designed by 上課教材、AI、許巧昕<br>對不起我這週延遲交作業了！</div>
+
+    <script>
+        $(document).ready(function () {
+            var $outer = $('#outer');
+            var $statusbar = $('#statusbar');
+
+            function updateStatusBar() {
+                var outerParent = $outer.parent();            
+                var outerTop = outerParent.offset().top;    
+                var outerHeight = outerParent.height();   
+                var scrollTop = $(window).scrollTop();      
+                var maxScroll = outerHeight - $outer.height(); 
+                var relativeScroll = scrollTop - outerTop;   
+                var newWidth = 0;
+
+                if (relativeScroll <= 0) {
+                    newWidth = 0;
+                } else if (relativeScroll >= maxScroll) {
+                    newWidth = $outer.width();
+                } else {
+                    newWidth = $outer.width() * (relativeScroll / maxScroll);
+                }
+
+                $statusbar.css('width', newWidth);
+            }
+
+            // 監聽滾動與視窗尺寸變動
+            $(window).on('scroll resize', updateStatusBar);
+
+            // 頁面初始呼叫
+            updateStatusBar();
+        });
+
+        $(window).on("load", function () {
+            const $scrollContainer = $(".scroll-container");
+            const containerOffsetTop = $scrollContainer.offset().top;
+            const containerHeight = $scrollContainer.outerHeight() - $(window).height();
+            const $horizontalSection = $(".horizontal-section");
+
+            $(window).on("scroll", function () {
+                const scrolled = $(window).scrollTop();
+
+                let scrollPercentage = 0;
+                if (
+                    scrolled > containerOffsetTop &&
+                    scrolled < containerOffsetTop + containerHeight
+                ) {
+                    scrollPercentage = (scrolled - containerOffsetTop) / containerHeight;
+                } else if (scrolled >= containerOffsetTop + containerHeight) {
+                    scrollPercentage = 1;
+                }
+
+                const maxScroll = $horizontalSection.outerWidth() - $(window).width();
+                const horizontalScroll = scrollPercentage * maxScroll;
+
+                $horizontalSection.css("transform", `translateX(-${horizontalScroll}px)`);
+            });
+        });    
+    </script>
+</body>
+
+</html>

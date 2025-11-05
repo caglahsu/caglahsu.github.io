@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Horizontal Section (水平區塊範例)</title>
+
+	<!-- Bootstrap CSS (CDN) -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+	<!-- Page CSS (inline as requested) -->
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+
+		body {
+			overflow-x: hidden;
+		}
+
+		.text-center {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			font-size: 2rem;
+			color: white;
+		}
+
+		.banner {
+			height: 100vh;
+			background-color: #f0f0f0;
+		}
+
+		/* 讓垂直捲動區域夠長以觸發水平捲動效果 */
+		.scroll-container {
+			height: 1000vh;
+			position: relative;
+		}
+
+		/* 固定在視窗上方，寬度為 5 個視窗寬 */
+		.horizontal-section {
+			position: sticky;
+			top: 0;
+			height: 100vh;
+			width: 500vw; /* 5個100vw的區塊 */
+			display: flex;
+			flex-direction: row;
+			transition: transform 0.1s linear; /* 平滑一點的移動 */
+		}
+
+		.horizontal-item {
+			width: 100vw;
+			height: 100vh;
+			flex-shrink: 0;
+		}
+
+		/* 反向水平區塊（隨捲動從左到右） */
+		.horizontal-section-reverse {
+			position: sticky;
+			top: 0;
+			height: 100vh;
+			width: 500vw; /* 5個100vw的區塊 */
+			display: flex;
+			flex-direction: row; /* 使用正常排列，並透過 transform 從左往右移動 */
+			transition: transform 0.1s linear;
+		}
+
+		.scroll-container-reverse {
+			height: 1000vh;
+			position: relative;
+		}
+	</style>
+</head>
+<body>
+
+	<div class="banner bg-primary text-center">Banner Section</div>
+
+	<div class="scroll-container">
+		<div class="horizontal-section">
+			<div class="horizontal-item bg-dark text-center">Section 1</div>
+			<div class="horizontal-item bg-secondary text-center">Section 2</div>
+			<div class="horizontal-item bg-success text-center">Section 3</div>
+			<div class="horizontal-item bg-danger text-center">Section 4</div>
+			<div class="horizontal-item bg-info text-center">Section 5</div>
+		</div>
+	</div>
+
+	<div class="vh-100 bg-dark text-center">Footer Section 1</div>
+	<div class="vh-100 bg-warning text-center">Footer Section 2</div>
+	<div class="vh-100 bg-info text-center">Footer Section 3</div>
+
+
+	<!-- jQuery (CDN) -->
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+	<!-- Bootstrap Bundle JS (包含 Popper) -->
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+	<!-- Page Script: horizontal scroll on vertical scroll -->
+	<script>
+		$(function () {
+			const $scrollContainer = $(".scroll-container");
+			const $horizontalSection = $(".horizontal-section");
+
+			let containerOffsetTop = 0;
+			let containerHeight = 0;
+
+			function updateSizes() {
+				containerOffsetTop = $scrollContainer.offset().top;
+				containerHeight = $scrollContainer.outerHeight() - $(window).height();
+			}
+
+			updateSizes();
+			$(window).on('resize', updateSizes);
+
+			$(window).on("scroll", function () {
+				const scrolled = $(window).scrollTop();
+				let scrollPercentage = 0;
+
+				if (scrolled > containerOffsetTop && scrolled < containerOffsetTop + containerHeight) {
+					scrollPercentage = (scrolled - containerOffsetTop) / containerHeight;
+				} else if (scrolled >= containerOffsetTop + containerHeight) {
+					scrollPercentage = 1;
+				}
+
+				const maxScroll = $horizontalSection.outerWidth() - $(window).width();
+				const horizontalScroll = scrollPercentage * maxScroll;
+
+				$horizontalSection.css("transform", `translateX(-${horizontalScroll}px)`);
+			});
+		});
+	</script>
+
+	<!-- Reverse horizontal section: scroll moves content left->right -->
+	<!-- 新增一個獨立容器與腳本，避免更動原本的程式碼 -->
+
+	<div class="scroll-container-reverse">
+		<div class="horizontal-section-reverse">
+			<div class="horizontal-item bg-info text-center">R Section 1</div>
+			<div class="horizontal-item bg-danger text-center">R Section 2</div>
+			<div class="horizontal-item bg-success text-center">R Section 3</div>
+			<div class="horizontal-item bg-secondary text-center">R Section 4</div>
+			<div class="horizontal-item bg-dark text-center">R Section 5</div>
+		</div>
+	</div>
+
+    <div class="vh-100 bg-dark text-center">Footer Section 1</div>
+	<div class="vh-100 bg-warning text-center">Footer Section 2</div>
+	<div class="vh-100 bg-info text-center">Footer Section 3</div>
+
+	<script>
+		// 獨立控制反向水平區塊（向右移動）
+		$(function () {
+			const $scrollContainerR = $(".scroll-container-reverse");
+			const $horizontalSectionR = $(".horizontal-section-reverse");
+
+			let containerOffsetTopR = 0;
+			let containerHeightR = 0;
+
+			function updateSizesR() {
+				containerOffsetTopR = $scrollContainerR.offset().top;
+				containerHeightR = $scrollContainerR.outerHeight() - $(window).height();
+			}
+
+			updateSizesR();
+			$(window).on('resize', updateSizesR);
+
+			function applyScrollR() {
+				const scrolled = $(window).scrollTop();
+				let scrollPercentage = 0;
+
+				if (scrolled > containerOffsetTopR && scrolled < containerOffsetTopR + containerHeightR) {
+					scrollPercentage = (scrolled - containerOffsetTopR) / containerHeightR;
+				} else if (scrolled >= containerOffsetTopR + containerHeightR) {
+					scrollPercentage = 1;
+				}
+
+				const maxScroll = $horizontalSectionR.outerWidth() - $(window).width();
+				// 初始位置：向左位移 maxScroll (顯示第一個項目)，隨著 scrollPercentage 增加，位移趨近於 0
+				const horizontalScroll = -maxScroll + scrollPercentage * maxScroll;
+
+				$horizontalSectionR.css('transform', `translateX(${horizontalScroll}px)`);
+			}
+
+			// apply on load/resize/scroll
+			applyScrollR();
+			$(window).on('resize scroll', applyScrollR);
+		});
+	</script>
+
+</body>
+</html>
