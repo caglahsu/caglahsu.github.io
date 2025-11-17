@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>一日採訪日記</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            scroll-behavior: smooth;
+        }
+        .landing-page {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: black;
+            color: white;
+            height: 100vh;
+            font-size: 3rem;
+        }
+        /* show core narrative sections */
+        .core-narrative {
+            display: block;
+        }
+        .chapter {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        /* keep videos fixed but hidden by default; reveal the active chapter's video */
+        /* make each chapter's video sticky so the next chapter pushes the previous up */
+        /* background videos fixed to viewport; one plays while its chapter is active */
+        .bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            opacity: 0;
+            transition: opacity 400ms ease-in-out;
+            pointer-events: none;
+        }
+        /* show only the active chapter's video when enabled and inside chapters */
+        .videos-enabled.in-chapters .chapter.active .bg-video {
+            opacity: 1;
+        }
+        /* ensure text overlays are above videos */
+        .text-overlay { z-index: 2; }
+        .text-overlay {
+            position: relative;
+            z-index: 2;
+            color: #fff;
+            padding: 40px 30px;
+            max-width: 900px;
+            background: #000; /* solid black background */
+            margin: 40px auto;
+            border-radius: 6px;
+            line-height: 1.9;
+            font-size: 18px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 420ms ease, transform 420ms ease;
+        }
+        /* when chapter active and videos enabled, show text at same time as video */
+        .videos-enabled.in-chapters .chapter.active .text-overlay{
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Onboarding thumbnails */
+        .thumbs-sticky {
+            position: sticky;
+            width: 80%;
+            margin-left: 20%;
+        }
+        /* make thumbnails portrait (vertical) */
+        .thumbs-sticky video {
+            cursor: pointer;
+            border-radius: 8px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+            width: 80% !important; 
+            height: auto;
+            aspect-ratio: 3/4; /* portrait */
+            object-fit: cover;
+        }
+        .thumbs-sticky .thumb-wrap { padding: 6px; display: inline-block; margin-left: auto;margin-right: auto;}
+        .thumbs-sticky .thumb-wrap.active { outline: 3px solid #f8f9fa; }
+        #onboarding {
+            height: 100vh;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Landing Page -->
+    <div class="landing-page">
+        一日採訪日記
+    </div>
+
+    <!-- Onboarding Page -->
+    <div id="onboarding" class="container-fluid py-5">
+        <div class="row">
+            <!-- Left Column: Video Thumbnails -->
+            <div class="col-md-6">
+                <div class="thumbs-sticky">
+                    <div class="row">
+                        <div class="col-6 thumb-wrap" data-target="#chapter1">
+                            <video src="video1.mov" muted playsinline preload="metadata"></video>
+                        </div>
+                        <div class="col-6 thumb-wrap" data-target="#chapter2">
+                            <video src="video2.MOV" muted playsinline preload="metadata"></video>
+                        </div>
+                        <div class="col-6 thumb-wrap" data-target="#chapter3">
+                            <video src="video3.MOV" muted playsinline preload="metadata"></video>
+                        </div>
+                        <div class="col-6 thumb-wrap" data-target="#chapter4">
+                            <video src="video4.MOV" muted playsinline preload="metadata"></video>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Descriptive Text -->
+            <div class="col-md-6 d-flex align-items-center">
+                <h5 style="margin-right: 80px; line-height: 150%;">
+                    歡迎來到「一日採訪日記」！
+                    <br><br>這是我上週五的一天，也是接下來一個月的日常QQ。
+                    <br><br>本網頁的圖片、文字皆由許巧昕本人自行拍攝與撰寫，文筆很爛，可以不用看沒關係＝＝
+                </h5>
+    
+            </div>
+        </div>
+    </div>
+
+    <!-- Core Narrative Chapters -->
+    <div class="core-narrative">
+        <!-- Chapter 1 -->
+        <div id="chapter1" class="chapter">
+            <!-- defer loading until onboarding passed -->
+            <video class="bg-video" data-src="video1.mov" muted loop playsinline preload="none"></video>
+            <div class="text-overlay">
+                <h2>Chapter 1 — 南下宜蘭</h2>
+                <p>
+                    <br>明明是宜蘭人但我好久沒回宜蘭了。這次因為採訪，所以有機會回宜蘭，但其實也是過家門而不入。很幸運這次回來竟然沒有下雨，印象中的宜蘭總是濕濕冷冷的，看來我家鄉對我很好，知道我扛了很多器材，所以天公作美。中午去吃了宜蘭很有名的炸醬麵，果然是家鄉味，在台北完全沒有這個味道。
+                    <br><br>所以下次回宜蘭是什麼時候呢？我也不知道。
+                </p>
+            </div>
+        </div>
+
+        <!-- Chapter 2 -->
+        <div id="chapter2" class="chapter">
+            <video class="bg-video" data-src="video2.MOV" muted loop playsinline preload="none"></video>
+            <div class="text-overlay">
+                <h2>Chapter 2 — 誤闖紅燈區</h2>
+                <p>
+                    <br>受訪者提供地址給我們，但谷歌完全導不到這個地址，只好在附近的巷子亂晃，結果貌似闖入宜蘭小巷內的紅燈區！？但裡面的人很好心的幫我們指路，最後還是平平安安抵達採訪地點。
+                    <br><br>不過這是我第一次知道宜蘭市區有這種地方，算是解鎖新成就？
+                </p>
+            </div>
+        </div>
+
+        <!-- Chapter 3 -->
+        <div id="chapter3" class="chapter">
+            <video class="bg-video" data-src="video3.MOV" muted loop playsinline preload="none"></video>
+            <div class="text-overlay">
+                <h2>Chapter 3 — 北上基隆</h2>
+                <p>
+                    <br>宜蘭採訪完大概下午三點半，又驅車前往基隆採訪另一名受訪者。這是我第一次搭火車去基隆，原來從宜蘭沒辦法直達基隆，要在七堵轉車才能抵達。下班時間的火車很多人，原來通勤的人那麼多啊！
+                    <br><br>好久沒來基隆了，但基隆好冷。
+                </p>
+            </div>
+        </div>
+
+        <!-- Chapter 4 -->
+        <div id="chapter4" class="chapter">
+            <video class="bg-video" data-src="video4.MOV" muted loop playsinline preload="none"></video>
+            <div class="text-overlay">
+                <h2>Chapter 4 — 港都之夜</h2>
+                <p>
+                    <br>基隆採訪完大概晚上八點半，其實沒有很想回台北，反而很想坐在基隆港邊聽海哭的聲音和看漂亮的夜景。好希望下次來基隆是來玩不是來工作，好想逛廟口夜市，好想去基隆嶼走走。
+                    <br><br>基隆的夜晚真的很美欸，如果不是要趕著回去寫作業，不然很想坐在這裡一整晚。
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery (needed for scroll handler and simple controls) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Scroll/mouse handler: enable videos only after onboarding passed; update active chapter; handle thumbnail clicks -->
+    <script>
+        $(function(){
+            const $chapters = $('.chapter');
+            const $thumbs = $('.thumb-wrap');
+            let videosEnabled = false;
+            const $onboarding = $('#onboarding');
+
+            function getOnboardingBottom(){
+                return $onboarding.length ? ($onboarding.offset().top + $onboarding.outerHeight()) : 0;
+            }
+
+            function enableVideos(){
+                 if(videosEnabled) return;
+                 videosEnabled = true;
+                 $('body').addClass('videos-enabled');
+                 $('.bg-video').each(function(){
+                     const ds = $(this).attr('data-src');
+                     if(ds && !this.src){
+                         this.src = ds;
+                         try{ this.load(); }catch(e){}
+                     }
+                 });
+                // attempt to play the initial active background video after load; browsers may block until interaction
+                setTimeout(function(){
+                    const $active = $('.chapter.active').find('.bg-video');
+                    if($active.length){ try{ $active[0].play().catch(()=>{}); }catch(e){} }
+                }, 300);
+             }
+
+            function checkEnableCondition(){
+                if(!$onboarding.length) return;
+                const bottom = getOnboardingBottom();
+                const past = $(window).scrollTop() >= bottom - 10;
+                if(past){
+                    enableVideos();
+                    $('body').addClass('in-chapters');
+                } else {
+                    // when scrolling back to onboarding, hide videos and pause them so onboarding displays normally
+                    $('body').removeClass('in-chapters');
+                    if(videosEnabled){
+                        $('.bg-video').each(function(){ try{ this.pause(); this.currentTime = 0; } catch(e){} });
+                    }
+                }
+             }
+
+            function updateActiveChapter(){
+                const mid = window.innerHeight / 2;
+                let found = false;
+                const bottom = getOnboardingBottom();
+                const pastOnboarding = $(window).scrollTop() >= bottom - 10;
+
+                // if we are above the chapters area, clear active states so onboarding shows normally
+                if(!pastOnboarding){
+                    $chapters.removeClass('active');
+                    $thumbs.removeClass('active');
+                    // ensure videos hidden/paused
+                    if(videosEnabled){
+                        $('.bg-video').each(function(){ try{ this.pause(); this.currentTime = 0; }catch(e){} });
+                    }
+                    // still check enabling (in case user scrolled past quickly)
+                    checkEnableCondition();
+                    return;
+                }
+
+                 $chapters.each(function(i){
+                     const rect = this.getBoundingClientRect();
+                     const $ch = $(this);
+                     if(rect.top <= mid && rect.bottom >= mid){
+                         if(!$ch.hasClass('active')){
+                             $chapters.removeClass('active');
+                             $ch.addClass('active');
+                             // sync thumb
+                             $thumbs.removeClass('active');
+                             $thumbs.eq(i).addClass('active');
+                         }
+                         // ensure text and video appear together when active
+                         if(videosEnabled){
+                            // play current, pause others
+                            $('.bg-video').each(function(j){ if(j===i){ try{ this.play().catch(()=>{}); }catch(e){} } else { try{ this.pause(); this.currentTime = 0; }catch(e){} } });
+                         }
+                         // text overlay is shown via CSS when .chapter.active and body classes are present
+                         found = true;
+                     }
+                 });
+                 if(!found){
+                     let closestIndex = 0;
+                     let closestDist = Infinity;
+                     $chapters.each(function(i){
+                         const rect = this.getBoundingClientRect();
+                         const dist = Math.abs((rect.top+rect.bottom)/2 - mid);
+                         if(dist < closestDist){ closestDist = dist; closestIndex = i; }
+                     });
+                     $chapters.removeClass('active');
+                     $chapters.eq(closestIndex).addClass('active');
+                     $thumbs.removeClass('active');
+                     $thumbs.eq(closestIndex).addClass('active');
+                     if(videosEnabled){
+                         $('.bg-video').each(function(j){ if(j===closestIndex){ try{ this.play().catch(()=>{}); }catch(e){} } else { try{ this.pause(); this.currentTime=0;}catch(e){} } });
+                     }
+                 }
+
+                 // check if we should enable videos once chapter positioning updated
+                 checkEnableCondition();
+             }
+
+             // thumbnail click: scroll to target chapter and re-check enabling after animation
+             $thumbs.on('click', function(){
+                 const tgt = $(this).attr('data-target');
+                 if(!tgt) return;
+                 const $target = $(tgt);
+                 if($target.length){
+                     const top = $target.offset().top;
+                     $('html,body').animate({scrollTop: top}, 600, function(){ checkEnableCondition(); });
+                 }
+             });
+
+             // autoplay thumb hover preview (optional)
+             $thumbs.find('video').on('mouseenter', function(){ this.play(); });
+             $thumbs.find('video').on('mouseleave', function(){ this.pause(); this.currentTime = 0; });
+
+             // initial run and listeners
+             updateActiveChapter();
+             $(window).on('scroll resize', function(){ requestAnimationFrame(updateActiveChapter); });
+         });
+     </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
