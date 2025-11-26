@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Path: TPE to IST</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            background: #000;
+        }
+
+        #globeViz {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            /* Move globe to background */
+        }
+
+        /* Content wrapper to ensure scrolling works and content is above globe */
+        #content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-section {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-family: sans-serif;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+            background-color: #000;
+            /* Solid black background */
+        }
+
+        .hero-section h1 {
+            font-size: 4rem;
+            margin: 0;
+        }
+
+        /* Create a tall scrollable area to drive the animation */
+        #scroll-container {
+            height: 400vh;
+            /* Remaining scroll height */
+        }
+
+        .footer-section {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+            font-family: sans-serif;
+            background-color: #000;
+            /* Black background to cover globe */
+            font-size: 1.2rem;
+            position: relative;
+            z-index: 2;
+            /* Ensure it covers the fixed globe (z-index -1) */
+        }
+
+        .overlay-text {
+            position: fixed;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            font-family: sans-serif;
+            text-align: center;
+            z-index: 2;
+            pointer-events: none;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+            opacity: 0;
+            /* Hidden initially */
+            transition: opacity 0.5s ease;
+        }
+    </style>
+    <script src="https://unpkg.com/globe.gl"></script>
+</head>
+
+<body>
+    <div id="globeViz"></div>
+
+    <div id="content">
+        <section class="hero-section">
+            <h1>Flight to Türkiye</h1>
+            <h2>🇹🇼 🛫 🇹🇷</h2>
+        </section>
+        <div id="scroll-container"></div>
+        <footer class="footer-section">
+            <p>11/26 課堂練習</p><br><br>
+            <p>produced by r14342011 許巧昕</p>
+        </footer>
+    </div>
+
+    <div class="overlay-text" id="hud">
+        <p>Scroll to Fly</p>
+        <h2>Taiwan (TPE) ➔ Turkey (IST)</h2>
+    </div>
+
+    <script>
+        // Coordinates
+        const TPE = { lat: 25.0797, lng: 121.2342, name: 'Taipei (TPE)' };
+        const IST = { lat: 41.2768, lng: 28.7293, name: 'Istanbul (IST)' };
+
+        // Flight path data
+        const flights = [
+            {
+                startLat: TPE.lat,
+                startLng: TPE.lng,
+                endLat: IST.lat,
+                endLng: IST.lng,
+                color: ['#ff0000', '#00ff00']
+            }
+        ];
+
+        // Initialize Globe
+        const world = Globe()
+            (document.getElementById('globeViz'))
+            .globeImageUrl('https://unpkg.com/three-globe/example/img/earth-night.jpg')
+            .backgroundImageUrl('https://unpkg.com/three-globe/example/img/night-sky.png')
+            .arcsData(flights)
+            .arcColor('color')
+            .arcDashLength(0.4)
+            .arcDashGap(4)
+            .arcDashInitialGap(() => Math.random() * 5)
+            .arcDashAnimateTime(1000)
+            .arcStroke(1) // Thinner line
+            .labelsData([TPE, IST])
+            .labelLat(d => d.lat)
+            .labelLng(d => d.lng)
+            .labelText(d => d.name)
+            .labelSize(1.5)
+            .labelDotRadius(0.8)
+            .labelColor(() => 'rgba(255, 165, 0, 0.75)')
+            .labelResolution(2);
+
+        // Disable default mouse interactions
+        world.controls().enableZoom = false;
+        world.controls().enablePan = false;
+        world.controls().enableRotate = false;
+
+        // Initial Camera Position (Start at Taiwan)
+        world.pointOfView({ lat: TPE.lat, lng: TPE.lng, altitude: 2.5 });
+
+        // Scroll Animation Logic
+        const hud = document.getElementById('hud');
+
+        window.addEventListener('scroll', () => {
+            const scrollContainer = document.documentElement;
+            const scrollTop = scrollContainer.scrollTop;
+            const viewportHeight = window.innerHeight;
+
+            // Calculate effective scroll height (total - viewport)
+            // But we want the animation to start AFTER the first viewport (hero section)
+            // Total scrollable area = hero (100vh) + scroll-container (400vh)
+            // We want 0-1 progress to map to scrollTop from 100vh to End.
+
+            const startScroll = viewportHeight; // Start animating after 100vh
+
+            // The footer starts entering when scrollTop + viewportHeight > footerOffset.
+            // Footer starts at 500vh (Hero 100 + Spacer 400).
+            // So footer enters when scrollTop > 400vh.
+            // We want animation to finish by then.
+            const animationEndScroll = viewportHeight * 4;
+            const scrollRange = animationEndScroll - startScroll;
+
+            // Show/Hide HUD
+            // Show HUD when past intro (50vh) and before footer starts entering (400vh)
+            if (scrollTop > viewportHeight * 0.5 && scrollTop < animationEndScroll) {
+                hud.style.opacity = 1;
+            } else {
+                hud.style.opacity = 0;
+            }
+
+            // Calculate progress (0 to 1)
+            let progress = 0;
+            if (scrollTop > startScroll) {
+                progress = (scrollTop - startScroll) / scrollRange;
+                progress = Math.min(Math.max(progress, 0), 1);
+            }
+
+            // Interpolate Camera Position
+            const currentLat = TPE.lat + (IST.lat - TPE.lat) * progress;
+            // Handle longitude wrapping if necessary (not needed for TPE->IST as it's direct west-ish)
+            const currentLng = TPE.lng + (IST.lng - TPE.lng) * progress;
+
+            // Keep altitude constant to maintain globe size
+            const currentAlt = 2.5;
+
+            world.pointOfView({
+                lat: currentLat,
+                lng: currentLng,
+                altitude: currentAlt
+            });
+
+
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            world.width(window.innerWidth);
+            world.height(window.innerHeight);
+        });
+    </script>
+</body>
+
+</html>
