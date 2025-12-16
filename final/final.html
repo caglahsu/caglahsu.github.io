@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Iansui&family=Noto+Serif+TC:wght@200..900&display=swap"
+        rel="stylesheet">
+    <title>Document</title>
+    <style>
+        /* Global Styles */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Serif TC', sans-serif;
+            font-weight: 500;
+            font-size: 1.2rem;
+            line-height: 150%;
+            overflow-x: hidden;
+            /* Prevent accidental horizontal scroll on body */
+        }
+
+        /* Remove text and box shadows from main content elements */
+        body,
+        p,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        a,
+        img,
+        figure {
+            text-shadow: none !important;
+            box-shadow: none !important;
+        }
+
+        /* Increase paragraph spacing for readability */
+        p {
+            margin-top: 0.75rem;
+            margin-bottom: 1.75rem;
+        }
+
+        .navbar {
+            font-size: 1.5rem;
+            line-height: 1.25;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Noto Serif TC', serif;
+            font-weight: 900;
+        }
+
+        .info-box h1,
+        .info-box h2,
+        .info-box h3,
+        .info-box h4,
+        .info-box h5,
+        .info-box h6 {
+            font-family: 'Noto Serif TC', serif;
+            font-weight: 900;
+            text-align: center;
+            line-height: 1.5;
+        }
+
+        /* Header Styling */
+        #intro-header {
+            position: relative;
+            overflow: visible;
+        }
+
+        #header-bg-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 150%;
+            /* Oversize width to ensure coverage */
+            min-height: 150%;
+            /* Oversize height to ensure coverage */
+            z-index: -1;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            align-content: center;
+            pointer-events: none;
+            /* Don't interfere with clicks */
+        }
+
+        #header-bg-container img {
+            max-width: 100%;
+            height: 100px;
+            /* Approximate 50% scale for typical banners */
+            width: auto;
+            flex-shrink: 0;
+            margin: 2px;
+            /* Slight spacing for collage effect */
+        }
+
+        /* Text box with blurred background */
+        #header-text-box {
+            position: relative;
+            z-index: 10;
+            padding: 60px 80px;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(50px);
+            border-radius: 8px;
+            max-width: 90%;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 3px solid white;
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+
+        .mouse {
+            width: 36px;
+            height: 56px;
+            border: 3px solid white;
+            border-radius: 18px;
+            position: relative;
+            margin: 0 auto 12px;
+            filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.8));
+        }
+
+        .wheel {
+            width: 6px;
+            height: 12px;
+            background: white;
+            border-radius: 3px;
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: scroll-wheel 1.5s ease-in-out infinite;
+            filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.8));
+        }
+
+        @keyframes scroll-wheel {
+            0% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0);
+            }
+
+            100% {
+                opacity: 0;
+                transform: translateX(-50%) translateY(12px);
+            }
+        }
+
+        .arrow {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .arrow span {
+            width: 16px;
+            height: 16px;
+            border-bottom: 3px solid white;
+            border-right: 3px solid white;
+            transform: rotate(45deg);
+            margin: -8px 0;
+            animation: scroll-arrow 1.5s ease-in-out infinite;
+            filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.8));
+        }
+
+        .arrow span:nth-child(2) {
+            animation-delay: 0.15s;
+        }
+
+        @keyframes scroll-arrow {
+            0% {
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0;
+            }
+        }
+
+        /* Chapter Styling */
+        .chapter-header {
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Scrolly Section Base */
+        .scrolly-section {
+            position: relative;
+            width: 100%;
+            /* User requested 300vh height for sections to allow "staying" for a period */
+            height: 300vh;
+        }
+
+        /* Extend sec-2-2 height for additional content */
+        #sec-2-2,
+        #sec-3-3 {
+            height: 500vh;
+        }
+
+        #sec-0-1 {
+            background: transparent;
+        }
+
+        #sec-0-1 .content-overlay {
+            padding-top: 100vh;
+        }
+
+        #sec-0-1 .content-overlay .info-box:first-child {
+            margin-top: 50vh;
+        }
+
+        /* Vertical Scroll Section Styling */
+        .vertical-scroll .sticky-container {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            width: 100%;
+            overflow: visible;
+        }
+
+        .vertical-scroll .background-visual {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+        }
+
+        .vertical-scroll .content-overlay {
+            position: relative;
+            z-index: 1;
+            padding-top: 10vh;
+            /* Start content a bit down */
+            /* 
+       To make the content scroll "within" the sticky container, 
+       we can either let it flow naturally (but the container is overflow:hidden)
+       OR we can make the overlay itself scrollable?
+       
+       Actually, if the container is sticky and 100vh, and the parent is 300vh,
+       the parent scrolls. The sticky container stays fixed.
+       The content INSIDE the sticky container will NOT scroll unless we animate it 
+       or if the sticky container is just a background holder.
+       
+       Correction: 
+       If we want "info boxes can scroll within the section", 
+       we should probably NOT make the *entire* content wrapper sticky.
+       
+       Better approach for Vertical:
+       - Parent (.scrolly-section) is 300vh.
+       - Background is sticky (top: 0, height: 100vh).
+       - Content is normal flow (absolute or relative on top of background).
+    */
+        }
+
+        /* Revised Vertical Scroll Logic */
+        /* .vertical-scroll block removed (empty rule cleanup) */
+
+        .vertical-scroll .sticky-container {
+            /* This acts as the background holder */
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            width: 100%;
+            z-index: 0;
+        }
+
+        .vertical-scroll .content-overlay {
+            /* This content scrolls naturally over the sticky background */
+            position: relative;
+            z-index: 1;
+            margin-top: -100vh;
+            /* Pull content up to overlap the sticky background */
+            min-height: 300vh;
+            /* Ensure it matches the section height so we can scroll through it */
+            pointer-events: none;
+            /* Let clicks pass through to background if needed, but usually we want text interaction */
+        }
+
+        .vertical-scroll .content-overlay .info-box {
+            pointer-events: auto;
+            background: rgba(255, 255, 255, 0.85);
+            margin-bottom: 80vh;
+            /* Spacing between boxes */
+            backdrop-filter: blur(50px);
+        }
+
+        .vertical-scroll .content-overlay .info-box:first-child {
+            margin-top: 50vh;
+        }
+
+        /* Horizontal Scroll Section Styling (empty rule removed) */
+
+        .horizontal-scroll .sticky-wrapper {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .horizontal-track {
+            display: flex;
+            height: 100%;
+            width: max-content;
+            /* Will be calculated or set to fit all panels */
+            will-change: transform;
+        }
+
+        .h-panel {
+            width: 100vw;
+            height: 100vh;
+            flex-shrink: 0;
+            box-sizing: border-box;
+        }
+
+        /* Fade + Overlay Enhancements */
+        .fading-bg {
+            transition: opacity 600ms ease;
+        }
+
+        #sec-2-1 .background-visual {
+            opacity: 1;
+            /* make visible by default */
+        }
+
+        #sec-1-2 .background-visual {
+            opacity: 1;
+        }
+
+        /* Ensure collage never shows through during crossfade */
+        #sec-1-2 .sticky-container,
+        #sec-3-1 .sticky-container {
+            background: white;
+        }
+
+        .immersive-story {
+            pointer-events: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* center children horizontally while stacking */
+        }
+
+        .story-columns {
+            max-width: 860px;
+            width: 100%;
+            line-height: 2;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.35);
+            margin: 0 auto;
+            /* ensure centered when not using flex */
+            text-align: justify;
+        }
+
+        .story-columns h2 {
+            font-size: 2.2rem;
+        }
+
+        /* Divider between stacked story columns */
+        .story-columns+.story-columns {
+            border-top: 2px solid rgba(255, 255, 255, 0.6);
+            margin-top: 6vh;
+            padding-top: 6vh;
+        }
+
+        .overlay-title {
+            position: sticky;
+            top: 15vh;
+            /* ~15% from top */
+            margin-left: 15vw;
+            /* ~15% from left */
+            z-index: 2;
+            max-width: 70vw;
+            /* keep text away from right edge */
+            transition: transform 400ms ease;
+        }
+
+        /* Handwritten Font */
+        .iansui-regular {
+            font-family: "Iansui", cursive;
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        .hw {
+            font-family: "Iansui", cursive;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 2rem;
+            line-height: 200%;
+        }
+
+        .black {
+            color: black;
+        }
+
+        /* Photo Gallery in sec-2-2 */
+        .photo-gallery {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            width: 85vw;
+            margin: 8vh auto 0;
+            pointer-events: auto;
+        }
+
+        .photo-item {
+            flex: 1;
+            text-align: center;
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: auto;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .photo-caption {
+            margin-top: 12px;
+            font-size: 1.5rem;
+            text-align: left;
+            line-height: 1.5;
+            color: rgba(255, 255, 255, 0.9);
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Before/After wipe for sec-3-1 */
+        .before-after-overlay {
+            transition: clip-path 50ms linear;
+            z-index: 1;
+        }
+
+        /* Center overlay text in the final section */
+        #sec-6-2 .content-overlay {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            pointer-events: auto;
+        }
+
+        #sec-6-2 .overlay-title {
+            position: static;
+            margin: 0 auto;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="scrolly-section vertical-scroll" id="sec-5"> <!--id 改sec-5-->
+        <div class="sticky-container">
+            <div class="background-visual fading-bg" style="background-image: url(./img/ch3_oldhouseface_01.jpg);">
+            </div><!--檔名你要改一下-->
+        </div>
+        <div id="sec-2-1-overlay" class="content-overlay container-fluid"> <!--這裡id 沒改-->
+            <div class="overlay-title">
+                <h2 class="display-4 fw-bold text-white"
+                    style="text-shadow: 2px 2px 4px rgba(0,0,0,0.6); line-height: 150%;">用創意，延續老屋新意</h2>
+                <h3 class="display-6 fw-bold text-white"
+                    style="text-shadow: 2px 2px 4px rgba(0,0,0,0.6); line-height: 180%;">——老屋顏工作室創辦人 辛永勝、楊朝景</h3>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="story-columns" style="max-width: 1500px;;margin-bottom: 0px; text-align: center; margin-top: 100px;">
+            <h2>「將熟悉的台灣溫度文創化，成為一種讓世代理解台灣歷史故事的媒介。」</h2><br>
+            <h3>—— 老屋顏工作室創辦人 辛永勝、楊朝景</h3>
+        </div>
+        <div class="story-columns" style="margin-bottom: 0px;">
+            <p>走在都市街道中，老舊的房子常常容易被忽略，甚至被視為阻礙或老舊的象徵。然而，對於老屋顏的創辦人而言，這些房子與招牌、鐵窗花、彩繪玻璃都是充滿故事的城市記憶。他們注意到，雖然這些元素在日常生活中漸漸消失，但卻仍然帶有熟悉感——一種只有在童年記憶與街景交會時才能感受到的溫度。
+            </p>
+        </div>
+        <img src="img/ch3_oldhouseface_02.jpg" style="width:100%;height:auto; margin-bottom: 70px;"> <!--檔名你要改一下-->
+        <div class="story-columns" style="margin-bottom: 70px;">
+            <p>老屋顏工作室從經營社群平台起家，創辦人在台灣本土旅行的過程中，開始拍攝這些局部的老屋元素並進行社群分享，從鐵窗花、手繪招牌、摩斯字、馬賽克、建築街景等，讓觀者重新發現這些被忽略的美感，並深入意識到台灣五六十年前深植於建築屋材的歷史記憶，反轉大眾對於台灣老屋的負面印象。
+            </p>
+            <p>在創辦人長期的紀錄之下，一個反復出現的發現在於，技術的更新逐漸改變世代對於「真實」的想像，也改變了街景的質地。以手繪招牌為例，現在的招牌多半透過輸出與印刷完成，色彩高度精準、比例準確、圖像幾乎與照片無異，「真實感」仰賴的是複製技術的還原度。但在印刷普及之前，招牌要「看起來很真」，必須靠師傅一筆一畫去模擬——無論是食品、人物還是商品，都得用手繪的方式還原出立體感與質地。從當時的標準來看，那些畫面已經相當逼真；然而放到今天的眼光裡，我們很容易看到比例略為失調、用色不那麼準確，甚至帶著明顯的人工誤差。對老屋顏來說，正是這些「不那麼完美」的地方，構成了我們今天再回頭看時，覺得有趣、甚至覺得可愛的美感來源。
+            </p>
+            <p>隨著社群關注度的提升，老屋顏期許讓更多民眾認知到台灣傳統文化的故事，因此開始將這些元素轉化為文創商品於 Pinkoi
+                等文創平台進行販售。從紙膠帶、文具、文創設計商品、手機殼等，甚至到前年與悠遊卡公司合作推出之老屋顏悠遊卡，透過將故事融入設計，擴大接觸群體，這些設計不只是紀念品，而是一種讓更多人理解老屋美學的媒介。商品成為了文化的載體，消費者足以在購買的過程中被引導去了解每個圖案背後的故事，讓年輕世代用新的方式接觸、理解與傳承這些歷史細節。
+            </p>
+        </div>
+        </div>
+        <img src="img/ch3_oldhouseface_03.jpg" alt="old house face 03">
+        <div class="story-columns" style="margin-bottom: 200px; margin-top: 70px;">
+            <p>老屋顏工作室秉持對地方的使命感在文創設計中保留這份手作感，不僅延續傳統技藝，也賦予老屋元素新的生命與社會價值。透過老屋顏的努力，台灣的街景記憶不再只是被動保存的歷史，而是可以被重新認識、被商品化、被傳播，並在年輕世代的創意下找到新的實用場域。
+            </p>
+            <p>傳統不只是過去，它可以與創新共生，成為現代文化中有溫度、有故事的一部分。</p>
+            <p>老屋顏 FB 粉絲專頁：<a
+                    href="https://www.facebook.com/OldHouseFace/?locale=zh_TW">https://www.facebook.com/OldHouseFace/?locale=zh_TW</a>
+                <br>老屋顏 IG 粉絲專頁：<a
+                    href="https://www.instagram.com/oldhouseface/">https://www.instagram.com/oldhouseface/</a>
+            </p>
+            </p>
+        </div>
+    </section>
+    <section class="scrolly-section vertical-scroll" id="sec-6"> <!--id 改sec-6-->
+        <div class="sticky-container">
+            <div class="background-visual fading-bg" style="background-image: url(./img/ch4_00_new.jpg);"></div>
+            <!--檔名你要改一下-->
+        </div>
+        <div id="sec-2-1-overlay" class="content-overlay container-fluid"> <!--這裡id 沒改-->
+            <div class="overlay-title">
+                <h2 class="display-4 fw-bold text-white"
+                    style="text-shadow: 2px 2px 4px rgba(0,0,0,0.6); line-height: 150%;">當招牌會老去，<br>記憶要由誰守住？</h2>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="story-columns" style="margin-top: 70px; margin-bottom: 0px;">
+            <p>當我們仰望眼前的城市街景，屬於傳統招牌的記憶將逐漸在這一世代中模糊。</p>
+            <p>這份歷史記憶，無可厚非地會隨著時間不斷消退，文化消逝，在長遠的時間軸上幾乎是必然，因為每一代都有屬於自己的樣貌，也都有自己選擇保留和放下的東西。身為站在這塊土地上的人，屬於我們的台灣傳統文化也許會變形、會更迭，甚至有一天某些形式真的會消失，在焦急於文化消逝的呼喊下，我們或許能夠換個角度置放這份焦慮，重新思考在「更新」與「保存」之間是否仍有可能並存。
+            </p>
+            <p>在這個「什麼都可以更新」的世代，老職人因應世代變遷，為自身掌握的技藝做出最適宜的打 算，在即便人力斷層、都市更新等種種因素的環境壓力下，從 Learn Bar 的創業理念、Kingson
+                的工法，到老屋顏的文化轉譯，仍有年輕一代面對傳統被政策與市場邊緣化的現實，並沒有把手繪招牌視為「只能被懷舊」的遺物，而是主動替它找新的功能與位置，透過創作、紀錄、重新設計，讓這些老元素以創新角色活化，在新的空間裡繼續存在。
+            </p>
+        </div>
+        <img src="img/ch4_01_new.jpg" style="width:100%;height:auto;"> <!--檔名你要改一下-->
+        <div class="story-columns" style="margin-bottom: 200px;">
+            <p>文化，為一塊土地的必要存在，不可諱言，歷史記憶的淡化與文化形式的更替是現代社會中難以避免的過程。然而，這並不意味著社會必須完全被動地接受一切痕跡的抹平。相反地，個體與群體仍可透過日常選擇，拒絕將自身定位為僅接受單一視覺規範的「同質化城市居民」。因為當我們漸漸地失去對於文化的認知，社會將會趨近同質化，喪失文化位置所象徵的特殊性。
+            </p>
+            <p>從文化復振角度出發，當現今社會環境與經營型態不再易於台灣傳統手繪招牌技藝的傳承，傳統也需要配合世代潮流，將文化精髓融入創新行銷以利曝光，將這些屬於台灣的傳統技藝進行文化轉譯，轉化為與當代生活型態接軌的視覺元素與資源。
+            </p>
+            <p>從個體層次出發，社會可以做些什麼？或許我們需成為環境具有意識的主體，意識到文化其所承載的時代資訊，並願意為其留下記錄、生成敘事。因此，當我們在街上行走時，不妨抬起頭看看街道仍懸掛的手繪老招牌，即便其顏料已然斑駁、結構不再完好，但那一刻所面對的不僅是對單一物件「是否應被更換」的技術性判斷，更是一個關於集體記憶與文化取向的根本問題。
+            </p>
+        </div>
+    </section>
+    <section class="scrolly-section vertical-scroll" id="sec-6-2"> <!--id 改sec-6-2-->
+        <div class="sticky-container">
+            <div class="background-visual fading-bg" style="background-image: url(./img/ch4_04.jpg);"></div>
+            <!--檔名你要改一下-->
+        </div>
+        <div id="sec-2-1-overlay" class="content-overlay container-fluid"> <!--這裡id 沒改-->
+            <div class="overlay-title">
+                <h3 class="fw-bold text-white text-center">我們要成為願意記得文化的人，還是習慣於遺忘文化的人？</h3><br><br>
+                <h3 class="fw-bold text-white text-center">我們可以選擇前者，</h3><br>
+                <h3 class="fw-bold text-white text-center">成為記著為臺灣文化驕傲的人。</h3>
+            </div>
+        </div>
+    </section>
+    <footer class="bg-dark text-white py-4 text-center">
+        <p>&copy; 2025 字裡行間的城市記憶—— 台灣手繪招牌的消逝與重生 | Designed by 國立臺灣大學新聞研究所</p>
+    </footer>
+
+</body>
+
+
+
+</html>
